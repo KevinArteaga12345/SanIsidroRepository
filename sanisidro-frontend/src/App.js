@@ -1,47 +1,43 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
+import HomePage from './pages/HomePage';
+import MenuPage from './pages/MenuPage';
+import CartPage from './pages/CartPage';
+import OrderHistoryPage from './pages/OrderHistoryPage';
+import AboutPage from './pages/AboutPage';
+import ReservaPage from './pages/ReservaPage';
+import UbicacionPage from './pages/UbicacionPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import TestRegister from './pages/TestRegister';
+import AdminDashboard from './pages/AdminDashboard';
 import './App.css';
-
-import Index from './pages/Index';
-import Carta from './pages/Carta';
-import Carrito from './pages/Carrito';
-import Reserva from './pages/Reserva';
-import Nosotros from './pages/Nosotros';
-import PanelAdmin from './pages/PanelAdmin';
-import LoginAdmin from './pages/LoginAdmin';
-
-import Header from './components/Header'; 
-
-const UsuariosAdmin = () => <h1>Gestión de Usuarios (Tabla de Admins)</h1>;
-const CartaAdmin = () => <h1>Gestión de la Carta (Modificar Productos)</h1>;
-const ReportesAdmin = () => <h1>Reportes (Lista de Pedidos)</h1>;
-
 
 function App() {
   return (
-    <Router>
-      <Header />
-      
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/carta" element={<Carta />} />
-          <Route path="/carro" element={<Carrito />} />
-          <Route path="/reserva" element={<Reserva />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-
-          <Route path="/admin/login" element={<LoginAdmin />} />
-          
-          <Route path="/admin/panel" element={<PanelAdmin />}>
-              <Route path="usuarios" element={<UsuariosAdmin />} />
-              <Route path="carta" element={<CartaAdmin />} />
-              <Route path="reportes" element={<ReportesAdmin />} />
-          </Route>
-          
-          <Route path="*" element={<h1>404: Página no encontrada</h1>} />
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/menu" element={<MenuPage />} />
+              <Route path="/carrito" element={<CartPage />} />
+              <Route path="/historial" element={<OrderHistoryPage />} />
+              <Route path="/nosotros" element={<AboutPage />} />
+              <Route path="/reserva" element={<ReservaPage />} />
+              <Route path="/ubicacion" element={<UbicacionPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/registro" element={<RegisterPage />} />
+              <Route path="/test-register" element={<TestRegister />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            </Routes>
+          </div>
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

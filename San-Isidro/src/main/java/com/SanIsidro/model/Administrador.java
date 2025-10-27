@@ -1,42 +1,49 @@
-package com.sanisidro.model;
 package com.SanIsidro.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- * Entidad que representa a los administradores del sistema.
- * Esta clase se vincula con la tabla "administradores" de MySQL.
- */
 @Entity
 @Table(name = "administradores")
 public class Administrador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Identificador único
+    private Long id;
 
-    private String username;
-    private String password;
+    @Column(unique = true, nullable = false)
+    private String usuario;
 
-    // 🔹 (Opcional) Puedes agregar más campos si decides crear una tabla extendida (AdminInfo)
-    // private String nombre;
-    // private String dni;
-    // private String correo;
+    @Column(nullable = false)
+    private String contraseña;
 
-    // ----- Constructores -----
+    private String nombre;
+    private String apellido;
+    private String dni;
+    private String telefono;
+    private String gmail;
+
+    // Constructor vacío (requerido por JPA)
     public Administrador() {
     }
 
-    public Administrador(String username, String password) {
-        this.username = username;
-        this.password = password;
+    // Constructor con parámetros
+    public Administrador(String usuario, String contraseña, String nombre, String apellido, 
+                        String dni, String telefono, String gmail) {
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.gmail = gmail;
     }
 
-    // ----- Getters y Setters -----
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -45,29 +52,59 @@ public class Administrador {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
-    // ----- toString (para depuración) -----
-    @Override
-    public String toString() {
-        return "Administrador{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getGmail() {
+        return gmail;
+    }
+
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
     }
 }
